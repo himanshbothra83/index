@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://127.0.0.1:5500/rugs%20and%20bags.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Handmade rugs and bags. Gift something handmade.">
+  <title>Rugs &amp; Bags Artisans – Premium Handcrafted Collection</title>
+  <style>
+    :root {
+      --dark: #231f1e;
+      --mid: #4a3b32;
+      --accent: #9e472a;
+      --accent-dark: #7a341e;
+      --soft: #f4ece1;
+      --bg: #faf7f5;
+      --card-bg: #ffffff;
+      --radius: 12px;
+      --transition: all 0.25s ease;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; background: var(--bg); color: var(--dark); line-height: 1.5; }
+    
+    /* Header & Navigation */
+    header { background: var(--dark); color: white; padding: 28px 20px; text-align: center; }
+    header h1 { margin: 0 0 6px; letter-spacing: 3px; font-size: 2rem; }
+    header p { margin: 0; opacity: 0.85; font-size: 0.95rem; }
+    
+    nav { background: var(--mid); position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 10px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 10px; }
+    .nav-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .nav-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    nav a, nav button.nav-btn { color: white; text-decoration: none; padding: 8px 14px; border-radius: 6px; background: none; border: 0; font-size: 0.95rem; cursor: pointer; transition: var(--transition); }
+    nav a:hover, nav button.nav-btn:hover { background: rgba(255,255,255,0.15); }
+    .cart-btn { display: flex; align-items: center; gap: 6px; font-weight: bold; background: var(--accent) !important; }
+    .user-btn { background: rgba(255,255,255,0.2) !important; font-weight: 500; }
+    .admin-btn { background: #333 !important; font-weight: 500; }
+
+    /* Hero Banner */
+    .banner { background: var(--soft); text-align: center; padding: 60px 20px; border-bottom: 1px solid #e6dcd0; }
+    .banner h2 { margin-top: 0; font-size: clamp(2rem, 4vw, 2.8rem); color: var(--dark); }
+    .banner p { max-width: 600px; margin: 0 auto 20px; color: var(--mid); }
+    .btn { background: var(--accent); color: white; border: 0; padding: 10px 20px; cursor: pointer; border-radius: 6px; font-size: 1rem; text-decoration: none; display: inline-block; font-weight: 500; transition: var(--transition); }
+    .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn.secondary { background: #e2d7cc; color: var(--dark); }
+    .btn.secondary:hover { background: #d0c2b5; }
+
+    /* Controls & Filters Bar */
+    .controls-bar { max-width: 1200px; margin: 30px auto 10px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filters button { background: white; color: var(--dark); border: 1px solid #d5cbc1; padding: 7px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: var(--transition); }
+    .filters button.active, .filters button:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    
+    .search-sort { display: flex; gap: 10px; flex-wrap: wrap; }
+    .search-sort input, .search-sort select { padding: 8px 14px; border: 1px solid #d5cbc1; border-radius: 6px; font-size: 0.9rem; background: white; outline: none; }
+    .search-sort input { width: 200px; }
+
+    /* Products Grid */
+    .products { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; padding: 20px; }
+    .product { background: var(--card-bg); padding: 16px; text-align: left; border-radius: var(--radius); box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: var(--transition); display: flex; flex-direction: column; position: relative; border: 1px solid #eee; cursor: pointer; }
+    .product:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+    .product img { width: 100%; height: 240px; object-fit: cover; border-radius: 8px; background: #eee; }
+    .badge { position: absolute; top: 26px; left: 26px; background: var(--accent); color: white; padding: 4px 10px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; text-transform: uppercase; }
+    .product h3 { margin: 14px 0 6px; font-size: 1.1rem; color: var(--dark); }
+    .product p.desc { font-size: 0.85rem; color: #666; margin: 0 0 12px; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .product-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+    .price { font-weight: bold; color: var(--accent-dark); font-size: 1.15rem; }
+
+    /* Modals */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; z-index: 50; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(4px); }
+    .modal-overlay.open { display: flex; }
+    .modal { background: white; width: min(750px, 100%); border-radius: var(--radius); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; box-shadow: 0 20px 40px rgba(0,0,0,0.2); position: relative; animation: modalPop 0.3s ease; }
+    .modal.auth-modal { display: flex; flex-direction: column; width: min(400px, 100%); padding: 30px; grid-template-columns: 1fr; }
+    @keyframes modalPop { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .modal img { width: 100%; height: 100%; object-fit: cover; min-height: 320px; }
+    .modal-content { padding: 30px; display: flex; flex-direction: column; justify-content: space-between; }
+    .modal-close { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; z-index: 5; }
+    .modal-close:hover { background: var(--dark); }
+
+    .form-group { margin-bottom: 15px; text-align: left; }
+    .form-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; }
+    .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; }
+
+    /* Cart Drawer */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 30; backdrop-filter: blur(2px); }
+    .overlay.open { display: block; }
+    .drawer { position: fixed; top: 0; right: -420px; width: min(400px, 100%); height: 100%; background: white; z-index: 40; transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; box-shadow: -8px 0 24px rgba(0,0,0,0.15); }
+    .drawer.open { right: 0; }
+    .drawer header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; background: var(--dark); text-align: left; }
+    .drawer header h2 { margin: 0; font-size: 1.2rem; color: white; }
+    .drawer header button { background: none; border: 0; color: white; font-size: 1.6rem; cursor: pointer; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 15px 20px; }
+    .cart-item { display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+    .cart-item img { width: 64px; height: 64px; object-fit: cover; border-radius: 6px; }
+    .cart-item .info { flex: 1; }
+    .cart-item .info strong { display: block; font-size: 0.95rem; }
+    .cart-item .info span { color: var(--accent-dark); font-weight: 600; }
+    .qty { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .qty button { width: 26px; height: 26px; border: 1px solid #ccc; background: #fdfdfd; border-radius: 50%; cursor: pointer; font-weight: bold; }
+    .remove { background: none; border: 0; color: #b22; cursor: pointer; font-size: 0.8rem; padding: 0; margin-top: 4px; display: block; }
+    .cart-footer { padding: 20px; border-top: 1px solid #e6dcd0; background: #faf5f0; }
+    .total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; margin-bottom: 14px; }
+    .cart-footer .btn { width: 100%; text-align: center; margin-bottom: 8px; }
+    .empty { text-align: center; color: #777; padding: 40px 0; font-style: italic; }
+
+    /* Toast Notification */
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 100px); background: var(--dark); color: white; padding: 12px 24px; border-radius: 30px; opacity: 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 100; box-shadow: 0 6px 20px rgba(0,0,0,0.2); font-size: 0.95rem; }
+    .toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+    /* Footer */
+    footer { background: var(--dark); color: white; text-align: center; padding: 30px 20px; margin-top: 50px; }
+    footer a { color: var(--soft); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 650px) {
+      .modal { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
+      .modal img { height: 220px; min-height: 220px; }
+      .controls-bar { flex-direction: column; align-items: stretch; }
+      .search-sort { justify-content: space-between; }
+      .search-sort input { width: 100%; flex: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>RUGS &amp; BAGS</h1>
+    <p>Artisanal Handmade Collection &amp; Living Style</p>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-links">
+      <a href="http://127.0.0.1:5500/rugs%20and%20bags.html#top">Home</a>
+      <a href="http://127.0.0.1:5500/rugs%20and%20bags.html#products-section">Catalog</a>
+      <a href="http://127.0.0.1:5500/rugs%20and%20bags.html#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-btn admin-btn" id="open-admin">⚙️ Admin</button>
+      <button class="nav-btn user-btn" id="open-login">👤 <span id="user-display">yo</span></button>
+      <button class="nav-btn cart-btn" id="open-cart">🛒 Cart (<span id="cart-count">0</span>)</button>
+    </div>
+  </nav>
+
+  <section class="banner" id="top">
+    <h2>Gift Something Truly Handmade</h2>
+    <p>Discover one-of-a-kind textured rugs and artisan-crafted bags made with sustainable materials and timeless heritage craftsmanship.</p>
+    <a class="btn" href="http://127.0.0.1:5500/rugs%20and%20bags.html#products-section">Explore Collection</a>
+  </section>
+
+  <div id="products-section"></div>
+
+  <div class="controls-bar">
+    <div class="filters" id="filters" role="group" aria-label="Filter products">
+      <button class="active" data-filter="all">All Items</button>
+      <button data-filter="rug">Rugs</button>
+      <button data-filter="bag">Bags</button>
+      <button data-filter="decor">Decor</button>
+    </div>
+    <div class="search-sort">
+      <input type="text" id="search-input" placeholder="Search products..." aria-label="Search products">
+      <select id="sort-select" aria-label="Sort products">
+        <option value="featured">Featured</option>
+        <option value="low-high">Price: Low to High</option>
+        <option value="high-low">Price: High to Low</option>
+        <option value="name">Name: A to Z</option>
+      </select>
+    </div>
+  </div>
+
+  <main class="products" id="product-list"><article class="product"><img src="./Rugs &amp; Bags Artisans – Premium Handcrafted Collection_files/photo-1600121848594-d8644e57abab" alt="Traditional Handwoven Rug" loading="lazy"><span class="badge">Bestseller</span><h3>Traditional Handwoven Rug</h3><p class="desc">Exquisitely hand-knotted by veteran artisans using organic dyed wool. Adds timeless warmth, texture, and sophisticated boho charm to any living space.</p><div class="product-footer"><span class="price">₹999</span><button class="btn" style="padding: 6px 12px; font-size: 0.85rem;">+ Add</button></div></article><article class="product"><img src="./Rugs &amp; Bags Artisans – Premium Handcrafted Collection_files/photo-1548036328-c9fa89d128fa" alt="Artisan Leather Everyday Bag" loading="lazy"><span class="badge">Handcrafted</span><h3>Artisan Leather Everyday Bag</h3><p class="desc">Crafted from premium full-grain vegetable-tanned leather. Features spacious interior compartments, sturdy brass hardware, and durable reinforced stitching.</p><div class="product-footer"><span class="price">₹1,499</span><button class="btn" style="padding: 6px 12px; font-size: 0.85rem;">+ Add</button></div></article><article class="product"><img src="./Rugs &amp; Bags Artisans – Premium Handcrafted Collection_files/photo-1590874103328-eac38a683ce7" alt="Bohemian Jute &amp; Cotton Tote" loading="lazy"><span class="badge">New</span><h3>Bohemian Jute &amp; Cotton Tote</h3><p class="desc">Lightweight yet remarkably durable daily tote bag woven from sustainable natural jute and soft cotton threads. Perfect for markets, travel, or casual outings.</p><div class="product-footer"><span class="price">₹799</span><button class="btn" style="padding: 6px 12px; font-size: 0.85rem;">+ Add</button></div></article><article class="product"><img src="./Rugs &amp; Bags Artisans – Premium Handcrafted Collection_files/photo-1575444758702-4a6b9222336e" alt="Geometric Wool Floor Runner" loading="lazy"><span class="badge">Popular</span><h3>Geometric Wool Floor Runner</h3><p class="desc">A striking geometric patterned runner designed specifically for hallways, entryways, or bedside styling. Soft underfoot and exceptionally hard-wearing.</p><div class="product-footer"><span class="price">₹1,299</span><button class="btn" style="padding: 6px 12px; font-size: 0.85rem;">+ Add</button></div></article><article class="product"><img src="./Rugs &amp; Bags Artisans – Premium Handcrafted Collection_files/photo-1544816155-12df9643f363" alt="Minimalist Canvas Crossbody" loading="lazy"><span class="badge">Sale</span><h3>Minimalist Canvas Crossbody</h3><p class="desc">Compact, stylish, and practical canvas crossbody bag with adjustable leather straps. Great for daily commutes or weekend strolls.</p><div class="product-footer"><span class="price">₹649</span><button class="btn" style="padding: 6px 12px; font-size: 0.85rem;">+ Add</button></div></article><article class="product"><img src="./Rugs &amp; Bags Artisans – Premium Handcrafted Collection_files/photo-1513519245088-0e12902e5a38" alt="Macrame Wall Hanging Decor" loading="lazy"><span class="badge">Artisan</span><h3>Macrame Wall Hanging Decor</h3><p class="desc">Hand-knotted cotton cord wall hanging featuring intricate bohemian fringe design. Instantly elevates empty walls with organic texture.</p><div class="product-footer"><span class="price">₹549</span><button class="btn" style="padding: 6px 12px; font-size: 0.85rem;">+ Add</button></div></article></main>
+
+  <!-- Product Detail Modal -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">×</button>
+      <img id="modal-img" src="http://127.0.0.1:5500/rugs%20and%20bags.html" alt="">
+      <div class="modal-content">
+        <div>
+          <span id="modal-badge" class="badge" style="position:static; margin-bottom:10px; display:inline-block;"></span>
+          <h2 id="modal-title" style="margin: 0 0 10px;"></h2>
+          <p id="modal-price" class="price" style="font-size: 1.3rem; margin-bottom: 12px;"></p>
+          <p id="modal-desc" style="color: #555; font-size: 0.95rem;"></p>
+        </div>
+        <button class="btn" id="modal-add-btn" style="width: 100%; margin-top: 20px;">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login / Account Modal -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal auth-modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="login-close" aria-label="Close modal">×</button>
+      <h2 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Account Sign In</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="user-name">Full Name</label>
+          <input type="text" id="user-name" placeholder="Enter your name" required="">
+        </div>
+        <div class="form-group">
+          <label for="user-email">Email Address</label>
+          <input type="email" id="user-email" placeholder="Enter your email" required="">
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Save Account Info</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Panel Modal -->
+  <div class="modal-overlay" id="admin-modal">
+    <div class="modal auth-modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="admin-close" aria-label="Close modal">×</button>
+      <h2 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Store Admin Panel</h2>
+      
+      <div id="admin-dashboard-view">
+        <p><strong>Registered User Profile:</strong></p>
+        <div id="admin-user-info" style="background: #f4ece1; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9rem;">Name: yo<br>Email: exaple@gmail.com</div>
+        
+        <p><strong>Quick Store Stats:</strong></p>
+        <ul style="font-size: 0.9rem; padding-left: 20px; margin-bottom: 20px;">
+          <li>Total Catalog Items: <span id="admin-product-count">6</span></li>
+          <li>Active Storage Cart Status: <span id="admin-cart-status">Empty</span></li>
+        </ul>
+
+        <button type="button" class="btn secondary" id="admin-close-btn" style="width: 100%;">Close Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="Shopping cart" aria-hidden="true">
+    <header>
+      <h2>Your Cart</h2>
+      <button id="close-cart" aria-label="Close cart">×</button>
+    </header>
+    <div class="cart-items" id="cart-items"><p class="empty">Your cart is empty.</p></div>
+    <div class="cart-footer">
+      <div class="total"><span>Total</span><span id="cart-total">₹0</span></div>
+      <a class="btn" id="whatsapp-btn" href="https://wa.me/919876543210?text=Hi!%20I%27d%20like%20to%20place%20an%20order%3A%0A%0A%0A%0ATotal%3A%20%E2%82%B90%0A%0ACustomer%3A%20yo%20(exaple%40gmail.com)" target="_blank" rel="noopener" style="display:none">Order via WhatsApp</a>
+      <button class="btn secondary" id="clear-cart" style="display: none;">Clear Cart</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Welcome, yo!</div>
+
+  <footer id="contact">
+    <p>Have questions or custom requests? Reach out at <a href="mailto:hello@rugsandbags.com">hello@rugsandbags.com</a></p>
+    <p>© 2026 Rugs &amp; Bags Artisans. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Replace with your WhatsApp number (country code + number, no '+' or spaces)
+    const WHATSAPP_NUMBER = "919876543210";
+
+    const PRODUCTS = [
+      { 
+        id: 1, 
+        name: "Traditional Handwoven Rug", 
+        category: "rug", 
+        price: 999, 
+        image: "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=600&q=80", 
+        badge: "Bestseller",
+        description: "Exquisitely hand-knotted by veteran artisans using organic dyed wool. Adds timeless warmth, texture, and sophisticated boho charm to any living space."
+      },
+      { 
+        id: 2, 
+        name: "Artisan Leather Everyday Bag", 
+        category: "bag", 
+        price: 1499, 
+        image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80", 
+        badge: "Handcrafted",
+        description: "Crafted from premium full-grain vegetable-tanned leather. Features spacious interior compartments, sturdy brass hardware, and durable reinforced stitching."
+      },
+      { 
+        id: 3, 
+        name: "Bohemian Jute & Cotton Tote", 
+        category: "bag", 
+        price: 799, 
+        image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=600&q=80", 
+        badge: "New",
+        description: "Lightweight yet remarkably durable daily tote bag woven from sustainable natural jute and soft cotton threads. Perfect for markets, travel, or casual outings."
+      },
+      { 
+        id: 4, 
+        name: "Geometric Wool Floor Runner", 
+        category: "rug", 
+        price: 1299, 
+        image: "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?auto=format&fit=crop&w=600&q=80", 
+        badge: "Popular",
+        description: "A striking geometric patterned runner designed specifically for hallways, entryways, or bedside styling. Soft underfoot and exceptionally hard-wearing."
+      },
+      { 
+        id: 5, 
+        name: "Minimalist Canvas Crossbody", 
+        category: "bag", 
+        price: 649, 
+        image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80", 
+        badge: "Sale",
+        description: "Compact, stylish, and practical canvas crossbody bag with adjustable leather straps. Great for daily commutes or weekend strolls."
+      },
+      { 
+        id: 6, 
+        name: "Macrame Wall Hanging Decor", 
+        category: "decor", 
+        price: 549, 
+        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80", 
+        badge: "Artisan",
+        description: "Hand-knotted cotton cord wall hanging featuring intricate bohemian fringe design. Instantly elevates empty walls with organic texture."
+      }
+    ];
+
+    const $ = id => document.getElementById(id);
+    const rupees = n => "₹" + n.toLocaleString("en-IN");
+
+    let cart = {};
+    let currentUser = null;
+
+    try { cart = JSON.parse(localStorage.getItem("rugsbags-cart")) || {}; } catch (e) {}
+    try { currentUser = JSON.parse(localStorage.getItem("rugsbags-user")) || null; } catch (e) {}
+
+    let activeFilter = "all";
+    let searchQuery = "";
+    let sortBy = "featured";
+    let currentModalProduct = null;
+
+    function saveCart() {
+      try { localStorage.setItem("rugsbags-cart", JSON.stringify(cart)); } catch (e) {}
+    }
+
+    function updateAuthDisplay() {
+      if (currentUser && currentUser.name) {
+        $("user-display").textContent = currentUser.name.split(" ")[0];
+      } else {
+        $("user-display").textContent = "Sign In";
+      }
+    }
+
+    function renderProducts() {
+      const list = $("product-list");
+      list.innerHTML = "";
+
+      let filtered = PRODUCTS.filter(p => {
+        const matchesCategory = activeFilter === "all" || p.category === activeFilter;
+        const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.description.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+
+      if (sortBy === "low-high") filtered.sort((a, b) => a.price - b.price);
+      else if (sortBy === "high-low") filtered.sort((a, b) => b.price - a.price);
+      else if (sortBy === "name") filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+      if (filtered.length === 0) {
+        list.innerHTML = '<p class="empty" style="grid-column: 1/-1;">No matching products found.</p>';
+        return;
+      }
+
+      filtered.forEach(p => {
+        const card = document.createElement("article");
+        card.className = "product";
+        card.addEventListener("click", () => openModal(p));
+
+        const img = document.createElement("img");
+        img.src = p.image;
+        img.alt = p.name;
+        img.loading = "lazy";
+
+        const badge = document.createElement("span");
+        badge.className = "badge";
+        badge.textContent = p.badge;
+
+        const title = document.createElement("h3");
+        title.textContent = p.name;
+
+        const desc = document.createElement("p");
+        desc.className = "desc";
+        desc.textContent = p.description;
+
+        const footer = document.createElement("div");
+        footer.className = "product-footer";
+
+        const price = document.createElement("span");
+        price.className = "price";
+        price.textContent = rupees(p.price);
+
+        const btn = document.createElement("button");
+        btn.className = "btn";
+        btn.textContent = "+ Add";
+        btn.style.padding = "6px 12px";
+        btn.style.fontSize = "0.85rem";
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          addToCart(p.id);
+        });
+
+        footer.append(price, btn);
+        card.append(img, badge, title, desc, footer);
+        list.appendChild(card);
+      });
+    }
+
+    function openModal(product) {
+      currentModalProduct = product;
+      $("modal-img").src = product.image;
+      $("modal-img").alt = product.name;
+      $("modal-badge").textContent = product.badge;
+      $("modal-title").textContent = product.name;
+      $("modal-price").textContent = rupees(product.price);
+      $("modal-desc").textContent = product.description;
+      $("product-modal").classList.add("open");
+    }
+
+    function closeModal() {
+      $("product-modal").classList.remove("open");
+    }
+
+    $("modal-add-btn").addEventListener("click", () => {
+      if (currentModalProduct) {
+        addToCart(currentModalProduct.id);
+        closeModal();
+      }
+    });
+
+    function addToCart(id) {
+      cart[id] = (cart[id] || 0) + 1;
+      saveCart();
+      renderCart();
+      showToast(PRODUCTS.find(p => p.id === id).name + " added to cart!");
+    }
+
+    function changeQty(id, delta) {
+      cart[id] = (cart[id] || 0) + delta;
+      if (cart[id] <= 0) delete cart[id];
+      saveCart();
+      renderCart();
+    }
+
+    function removeItem(id) {
+      delete cart[id];
+      saveCart();
+      renderCart();
+    }
+
+    function renderCart() {
+      const box = $("cart-items");
+      box.innerHTML = "";
+      let total = 0, count = 0;
+      const lines = [];
+
+      Object.keys(cart).forEach(key => {
+        const p = PRODUCTS.find(item => item.id === Number(key));
+        if (!p) { delete cart[key]; return; }
+        const qty = cart[key];
+        total += p.price * qty;
+        count += qty;
+        lines.push(`${qty}x ${p.name} (${rupees(p.price * qty)})`);
+
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        
+        const img = document.createElement("img");
+        img.src = p.image;
+        img.alt = p.name;
+
+        const info = document.createElement("div");
+        info.className = "info";
+        const name = document.createElement("strong");
+        name.textContent = p.name;
+        const price = document.createElement("span");
+        price.textContent = rupees(p.price * qty);
+        
+        const remove = document.createElement("button");
+        remove.className = "remove";
+        remove.textContent = "Remove item";
+        remove.addEventListener("click", () => removeItem(p.id));
+        info.append(name, price, remove);
+
+        const qtyBox = document.createElement("div");
+        qtyBox.className = "qty";
+        const minus = document.createElement("button");
+        minus.textContent = "−";
+        minus.addEventListener("click", () => changeQty(p.id, -1));
+        const number = document.createElement("span");
+        number.textContent = qty;
+        const plus = document.createElement("button");
+        plus.textContent = "+";
+        plus.addEventListener("click", () => changeQty(p.id, 1));
+        qtyBox.append(minus, number, plus);
+
+        row.append(img, info, qtyBox);
+        box.appendChild(row);
+      });
+
+      if (!count) {
+        box.innerHTML = '<p class="empty">Your cart is empty.</p>';
+      }
+
+      $("cart-count").textContent = count;
+      $("cart-total").textContent = rupees(total);
+      
+      const wa = $("whatsapp-btn");
+      const validNumber = /^\d{10,15}$/.test(WHATSAPP_NUMBER);
+      wa.style.display = count && validNumber ? "block" : "none";
+      
+      let userInfoText = currentUser ? `\n\nCustomer: ${currentUser.name} (${currentUser.email})` : "";
+      const message = `Hi! I'd like to place an order:\n\n` + lines.join("\n") + `\n\nTotal: ` + rupees(total) + userInfoText;
+      wa.href = `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(message);
+      
+      $("clear-cart").style.display = count ? "block" : "none";
+    }
+
+    function openCart() {
+      $("drawer").classList.add("open");
+      $("overlay").classList.add("open");
+      $("drawer").setAttribute("aria-hidden", "false");
+    }
+    
+    function closeCart() {
+      $("drawer").classList.remove("open");
+      $("overlay").classList.remove("open");
+      $("drawer").setAttribute("aria-hidden", "true");
+    }
+
+    function showToast(message) {
+      const toast = $("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    // Login Modal Handlers
+    $("open-login").addEventListener("click", () => {
+      $("login-modal").classList.add("open");
+      $("overlay").classList.add("open");
+      if(currentUser) {
+        $("user-name").value = currentUser.name;
+        $("user-email").value = currentUser.email;
+      }
+    });
+
+    $("login-close").addEventListener("click", () => {
+      $("login-modal").classList.remove("open");
+      $("overlay").classList.remove("open");
+    });
+
+    $("login-form").addEventListener("submit", e => {
+      e.preventDefault();
+      currentUser = {
+        name: $("user-name").value,
+        email: $("user-email").value
+      };
+      localStorage.setItem("rugsbags-user", JSON.stringify(currentUser));
+      updateAuthDisplay();
+      $("login-modal").classList.remove("open");
+      $("overlay").classList.remove("open");
+      showToast("Welcome, " + currentUser.name + "!");
+      renderCart();
+    });
+
+    // Admin Panel Logic with Secure Passcode Prompt
+    const ADMIN_SECRET = "YourSecretPasscode123"; // Change this secret to your own password
+
+    $("open-admin").addEventListener("click", () => {
+      const enteredPass = prompt("Enter Admin Passcode:");
+      
+      if (enteredPass === ADMIN_SECRET) {
+        $("admin-modal").classList.add("open");
+        $("overlay").classList.add("open");
+        
+        $("admin-product-count").textContent = PRODUCTS.length;
+        $("admin-cart-status").textContent = Object.keys(cart).length > 0 ? "Items present" : "Empty";
+        
+        if (currentUser) {
+          $("admin-user-info").innerHTML = `Name: ${currentUser.name}<br>Email: ${currentUser.email}`;
+        } else {
+          $("admin-user-info").textContent = "No user signed in.";
+        }
+      } else if (enteredPass !== null) {
+        alert("Incorrect passcode!");
+      }
+    });
+
+    $("admin-close").addEventListener("click", () => {
+      $("admin-modal").classList.remove("open");
+      $("overlay").classList.remove("open");
+    });
+
+    $("admin-close-btn").addEventListener("click", () => {
+      $("admin-modal").classList.remove("open");
+      $("overlay").classList.remove("open");
+    });
+
+    // General Event Listeners
+    $("open-cart").addEventListener("click", openCart);
+    $("close-cart").addEventListener("click", closeCart);
+    $("overlay").addEventListener("click", () => { 
+      closeCart(); 
+      closeModal(); 
+      $("login-modal").classList.remove("open"); 
+      $("admin-modal").classList.remove("open"); 
+    });
+    $("modal-close").addEventListener("click", closeModal);
+    document.addEventListener("keydown", e => { 
+      if (e.key === "Escape") { 
+        closeCart(); 
+        closeModal(); 
+        $("login-modal").classList.remove("open"); 
+        $("admin-modal").classList.remove("open"); 
+      } 
+    });
+    
+    $("clear-cart").addEventListener("click", () => { cart = {}; saveCart(); renderCart(); });
+    
+    $("filters").addEventListener("click", e => {
+      const button = e.target.closest("button");
+      if (!button) return;
+      activeFilter = button.dataset.filter;
+      document.querySelectorAll("#filters button").forEach(b => b.classList.toggle("active", b === button));
+      renderProducts();
+    });
+
+    $("search-input").addEventListener("input", e => {
+      searchQuery = e.target.value;
+      renderProducts();
+    });
+
+    $("sort-select").addEventListener("change", e => {
+      sortBy = e.target.value;
+      renderProducts();
+    });
+
+    // Initial render
+    updateAuthDisplay();
+    renderProducts();
+    renderCart();
+  </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
